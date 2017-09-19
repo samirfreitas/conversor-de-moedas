@@ -67,7 +67,7 @@
                   </div>
                 </div>
                 <div class="col s2">
-                  <a href="http://materializecss.com/getting-started.html" style="margin-top: 18px;" id="download-button" class="btn-large waves-effect waves-light orange"><i class="material-icons">swap_horiz</i></a>
+                  <button  style="margin-top: 18px;" onclick="mudar();" id="download-button" class="btn-large waves-effect waves-light orange"><i class="material-icons">swap_horiz</i></a>
                 </div>
                 <div class="col s5">
                   <div class="row">
@@ -223,16 +223,9 @@
   
 
 
-//conversão de moeda para o resultado
-    var valorConvert = 0;
-    var de = "";
-    var para ="";
-    $("#montante").keyup(function() {
-      
-      de = $("#autocomplete-input-de").val().split("-");
-      para = $("#autocomplete-input-para").val().split("-");
-      valorConvert = fx.convert($(this).val().replace(/\./g,'').replace(/\,/g,'')/100, {from: de[1].trim(), to: para[1].trim()});
-      $(".valorConvertido").html(converterFloatReal(valorConvert.toFixed(2)));      
+//conversão de moeda para o resultado   
+    $("#montante").keyup(function() {      
+     calcular();    
     });
 
 // pegando as taxas para realizar conversões de moedas
@@ -299,7 +292,22 @@ function converterFloatReal(valor){
   return valor;
 }
 
-
+  function calcular(){
+      var valorConvert = 0;
+      var de = "";
+      var para ="";        
+      de = $("#autocomplete-input-de").val().split("-");
+      para = $("#autocomplete-input-para").val().split("-");
+      valorConvert = fx.convert($('#montante').val().replace(/\./g,'').replace(/\,/g,'')/100, {from: de[1].trim(), to: para[1].trim()});
+      $(".valorConvertido").html(converterFloatReal(valorConvert.toFixed(2)));        
+  }
+  function mudar(){
+    var aux = "";
+    aux = $("#autocomplete-input-de").val();
+    $("#autocomplete-input-de").val($("#autocomplete-input-para").val());
+    $("#autocomplete-input-para").val(aux);
+    calcular();
+  }
   </script>
   </body>
 </html>

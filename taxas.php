@@ -21,7 +21,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     
         while($row = $result->fetch_assoc()) {
-            if($row["dataAtualizacao"] < date("Y-m-d H:i:s",strtotime('-15 minutes'))){
+            if($row["dataAtualizacao"] < date("Y-m-d H:i:s",strtotime('-30 minutes'))){
 
                 // consultando api das taxas
                 $json =file_get_contents('https://openexchangerates.org/api/latest.json?app_id=fd73872f21184dd9b888597a236f6eda');
